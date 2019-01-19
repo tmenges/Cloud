@@ -1,0 +1,12 @@
+gcloud beta container --project "workdev" clusters create "my-zk-cluster" \
+                      --zone "us-west1-c" --username "admin" \
+                      --cluster-version "1.11.6-gke.2" --machine-type "custom-2-4096" \
+                      --image-type "COS" --disk-type "pd-standard" --disk-size "100" \
+                      --node-labels node_type=small \
+                      --scopes "https://www.googleapis.com/auth/devstorage.read_only","https://www.googleapis.com/auth/logging.write","https://www.googleapis.com/auth/monitoring","https://www.googleapis.com/auth/servicecontrol","https://www.googleapis.com/auth/service.management.readonly","https://www.googleapis.com/auth/trace.append" \
+                      --num-nodes "4" \
+                      --enable-cloud-logging --enable-cloud-monitoring --no-enable-ip-alias \
+                      --network "projects/workdev/global/networks/default" \
+                      --subnetwork "projects/workdev/regions/us-west1/subnetworks/default" \
+                      --addons HorizontalPodAutoscaling,HttpLoadBalancing \
+                      --enable-autoupgrade --enable-autorepair
